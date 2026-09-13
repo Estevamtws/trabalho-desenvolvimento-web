@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0B1F3A"/>
+      <stop offset="100%" stop-color="#102B4E"/>
+    </linearGradient>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-opacity="0.035" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <rect width="1200" height="800" fill="url(#grid)"/>
+  <circle cx="1030" cy="110" r="150" fill="#D72638" opacity="0.10"/>
+  <circle cx="130" cy="690" r="180" fill="#FFFFFF" opacity="0.04"/>
+
+  <!-- ground -->
+  <line x1="120" y1="565" x2="1080" y2="565" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="3"/>
+
+  <!-- wheels -->
+  <circle cx="280" cy="430" r="120" fill="none" stroke="#FFFFFF" stroke-width="16"/>
+  <circle cx="720" cy="430" r="120" fill="none" stroke="#FFFFFF" stroke-width="16"/>
+  <circle cx="280" cy="430" r="15" fill="#D72638"/>
+  <circle cx="720" cy="430" r="15" fill="#D72638"/>
+
+  <!-- spokes -->
+  <g stroke="#FFFFFF" stroke-opacity="0.35" stroke-width="3">
+    <line x1="280" y1="430" x2="400" y2="430"/>
+    <line x1="280" y1="430" x2="160" y2="430"/>
+    <line x1="280" y1="430" x2="280" y2="310"/>
+    <line x1="280" y1="430" x2="280" y2="550"/>
+    <line x1="720" y1="430" x2="840" y2="430"/>
+    <line x1="720" y1="430" x2="600" y2="430"/>
+    <line x1="720" y1="430" x2="720" y2="310"/>
+    <line x1="720" y1="430" x2="720" y2="550"/>
+  </g>
+
+  <!-- frame -->
+  <g fill="none" stroke="#D72638" stroke-width="22" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 280 430 L 465 305 L 560 430 Z"/>
+    <path d="M 465 305 L 630 310 L 560 430"/>
+    <path d="M 630 310 L 720 430"/>
+  </g>
+
+  <!-- fork -->
+  <line x1="630" y1="310" x2="720" y2="430" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+  <line x1="630" y1="310" x2="650" y2="257" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- handlebar -->
+  <path d="M 620 257 Q 650 239 690 257" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- seat -->
+  <line x1="465" y1="305" x2="445" y2="280" stroke="#FFFFFF" stroke-width="14"/>
+  <line x1="410" y1="280" x2="475" y2="280" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- crank -->
+  <circle cx="560" cy="430" r="26" fill="none" stroke="#FFFFFF" stroke-width="8"/>
+  <line x1="560" y1="430" x2="600" y2="465" stroke="#FFFFFF" stroke-width="8"/>
+  <circle cx="605" cy="470" r="8" fill="#D72638"/>
+
+  <!-- speed accents -->
+  <g stroke="#D72638" stroke-linecap="round">
+    <line x1="155" y1="240" x2="265" y2="240" stroke-width="12" opacity="0.85"/>
+    <line x1="120" y1="275" x2="235" y2="275" stroke-width="8" opacity="0.55"/>
+    <line x1="150" y1="310" x2="215" y2="310" stroke-width="5" opacity="0.35"/>
+  </g>
+
+  <!-- text -->
+  <text x="600" y="665" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="46" font-weight="700" fill="#FFFFFF">Bike de Aventura</text>
+  <text x="600" y="715" text-anchor="middle" font-family="Arial, Helvetica, sans-serif"
+        font-size="22" letter-spacing="8" fill="#D72638">SOFTBIKE</text>
+</svg>
