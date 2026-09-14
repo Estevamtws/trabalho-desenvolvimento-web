@@ -1,10 +1,10 @@
 /* ==========================================================
-   SOFTBIKE - BASE DE DADOS DOS PRODUTOS
+   SOFTBYKE - BASE DE DADOS DOS PRODUTOS
    Usada pela página produto.html para montar a página de
    detalhes e a seção de produtos similares dinamicamente.
    ========================================================== */
 
-const PRODUTOS_SOFTBIKE = {
+const PRODUTOS_SOFTBYKE = {
   "bike-01": {
     nome: "Bike Infantil Aro 16",
     categoria: "bicicletas",
@@ -102,9 +102,9 @@ const PRODUTOS_SOFTBIKE = {
     badge: "Mais vendida",
     imagem: "assets/produtos/bike-06.jpg",
     preco: "R$ 1.890,00",
-    descricaoCurta: "O modelo preferido dos clientes SoftBike.",
+    descricaoCurta: "O modelo preferido dos clientes SoftByke.",
     descricaoLonga:
-      "Eleita pelos clientes como a favorita da loja, esta bicicleta equilibra conforto, durabilidade e um ótimo custo-benefício. É a escolha certa para quem quer uma bike versátil, tanto para o dia a dia quanto para pedais de fim de semana, com a qualidade e a confiança que os clientes SoftBike já conhecem.",
+      "Eleita pelos clientes como a favorita da loja, esta bicicleta equilibra conforto, durabilidade e um ótimo custo-benefício. É a escolha certa para quem quer uma bike versátil, tanto para o dia a dia quanto para pedais de fim de semana, com a qualidade e a confiança que os clientes SoftByke já conhecem.",
     especificacoes: [
       "Equilíbrio perfeito entre conforto e desempenho",
       "Quadro durável para uso diário",

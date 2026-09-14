@@ -1,5 +1,5 @@
 /* ==========================================================
-   SOFTBIKE - FOLHA DE ESTILOS PRINCIPAL
+   SOFTBYKE - FOLHA DE ESTILOS PRINCIPAL
    Organizada por seções para facilitar a explicação em sala.
    Paleta baseada na logo oficial: preto, vermelho e branco.
    ========================================================== */
@@ -414,6 +414,15 @@ img {
   flex: 1 1 380px;
 }
 
+.hero-logo {
+  height: 110px;
+  width: auto;
+  display: block;
+  margin-bottom: 1.5rem;
+  filter: drop-shadow(0 0 20px rgba(255, 31, 61, 0.4));
+  animation: subir-fade 0.7s ease both;
+}
+
 .hero-texto h1 {
   color: var(--cor-clara);
   font-size: clamp(2.1rem, 4vw, 2.9rem);
@@ -457,6 +466,15 @@ img {
   border-radius: var(--raio-borda);
   box-shadow: 0 24px 50px -16px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-imagem-emblema img {
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 60px rgba(255, 31, 61, 0.35);
+  max-width: 420px;
+  margin: 0 auto;
+  display: block;
 }
 
 @keyframes subir-fade {
@@ -564,23 +582,38 @@ img {
 }
 
 .card-marca {
+  display: block;
   background-color: var(--cor-clara);
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-borda);
   padding: 1rem;
   text-align: center;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
   box-shadow: var(--sombra-card);
-  transition: transform var(--transicao), box-shadow var(--transicao);
+  transition: transform var(--transicao), box-shadow var(--transicao), border-color var(--transicao);
 }
 
 .card-marca:hover {
   transform: translateY(-5px);
   box-shadow: var(--sombra-card-hover);
+  border-color: var(--cor-destaque);
 }
 
 .card-marca img {
   margin: 0 auto 0.6rem auto;
   border-radius: var(--raio-borda);
+  height: 110px;
+  width: 100%;
+  object-fit: contain;
+  background: var(--cor-clara);
+  padding: 0.5rem;
+}
+
+.card-marca p {
+  font-weight: 600;
+  color: var(--cor-primaria);
 }
 
 /* GALERIA */
@@ -640,18 +673,44 @@ img {
   border-radius: var(--raio-borda);
 }
 
-.linha-destaque {
-  background-color: rgba(255, 31, 61, 0.06);
+.grupo-bicicletas {
+  background-color: rgba(37, 99, 235, 0.08);
 }
 
-.linha-indisponivel {
-  background-color: rgba(22, 22, 29, 0.05);
-  color: var(--cor-texto-suave);
+.grupo-acessorios {
+  background-color: rgba(217, 164, 6, 0.1);
+}
+
+.grupo-vestuario {
+  background-color: rgba(139, 92, 246, 0.08);
+}
+
+.grupo-servicos {
+  background-color: rgba(255, 31, 61, 0.06);
 }
 
 .celula-preco {
   font-weight: 700;
   color: var(--cor-destaque);
+}
+
+.status-disponivel,
+.status-indisponivel {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: var(--raio-pill);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.status-disponivel {
+  background-color: rgba(22, 163, 74, 0.15);
+  color: #15803d;
+}
+
+.status-indisponivel {
+  background-color: rgba(22, 22, 29, 0.1);
+  color: var(--cor-texto-suave);
 }
 
 /* FORMULÁRIOS */
@@ -962,6 +1021,79 @@ img {
 
 .oculto {
   display: none !important;
+}
+
+#bicicletas,
+#acessorios,
+#vestuario {
+  scroll-margin-top: 110px;
+}
+
+/* MODAL "ESCOLHA SUA FILIAL" (página de serviços) */
+.modal-orcamento {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espacamento);
+  background: rgba(10, 10, 14, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.modal-orcamento.aberto {
+  display: flex;
+}
+
+.modal-orcamento-conteudo {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: var(--cor-clara);
+  border-radius: var(--raio-borda);
+  padding: 2.2rem 1.8rem 1.8rem;
+  text-align: center;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+  animation: subir-fade 0.25s ease both;
+}
+
+.modal-orcamento-fechar {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.9rem;
+  border: none;
+  background: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--cor-primaria);
+  cursor: pointer;
+}
+
+.modal-orcamento-conteudo h3 {
+  margin-bottom: 0.5rem;
+}
+
+.modal-orcamento-conteudo p {
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.modal-orcamento-opcoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.modal-orcamento-opcoes .botao-secundario {
+  border-color: var(--cor-primaria);
+  color: var(--cor-primaria);
+}
+
+.modal-orcamento-opcoes .botao-secundario:hover {
+  background-color: var(--cor-primaria);
+  color: var(--cor-clara);
 }
 
 /* PÁGINA DE DETALHES DO PRODUTO */

@@ -1,7 +1,7 @@
 /* ==========================================================
-   SOFTBIKE - PÁGINA DE DETALHES DO PRODUTO
+   SOFTBYKE - PÁGINA DE DETALHES DO PRODUTO
    Lê o identificador do produto a partir do hash da URL
-   (ex.: produto.html#bike-01), busca em PRODUTOS_SOFTBIKE
+   (ex.: produto.html#bike-01), busca em PRODUTOS_SOFTBYKE
    (js/produtos-dados.js) e monta a página: imagem grande,
    descrição e produtos similares da mesma categoria.
 
@@ -12,7 +12,7 @@
 
 function renderizarPaginaDeProduto() {
   const idProduto = decodeURIComponent(window.location.hash.replace(/^#/, ""));
-  const produto = idProduto ? PRODUTOS_SOFTBIKE[idProduto] : null;
+  const produto = idProduto ? PRODUTOS_SOFTBYKE[idProduto] : null;
 
   const secaoDetalhe = document.querySelector("#produto-detalhe");
   const secaoNaoEncontrado = document.querySelector("#produto-nao-encontrado");
@@ -22,7 +22,7 @@ function renderizarPaginaDeProduto() {
     if (secaoDetalhe) secaoDetalhe.classList.add("oculto");
     if (secaoSimilares) secaoSimilares.classList.add("oculto");
     if (secaoNaoEncontrado) secaoNaoEncontrado.classList.remove("oculto");
-    document.title = "SoftBike - Produto não encontrado";
+    document.title = "SoftByke - Produto não encontrado";
     return;
   }
 
@@ -30,7 +30,7 @@ function renderizarPaginaDeProduto() {
   if (secaoSimilares) secaoSimilares.classList.remove("oculto");
   if (secaoNaoEncontrado) secaoNaoEncontrado.classList.add("oculto");
 
-  document.title = "SoftBike - " + produto.nome;
+  document.title = "SoftByke - " + produto.nome;
 
   const elMigalha = document.querySelector("#produto-migalha-atual");
   const elImagem = document.querySelector("#produto-imagem");
@@ -65,7 +65,7 @@ function renderizarPaginaDeProduto() {
   if (elWhatsapp) {
     const mensagem =
       "Olá! Tenho interesse no produto " + produto.nome + " (" + produto.preco + "). Poderia me passar mais informações?";
-    elWhatsapp.href = "https://wa.me/5561999982224?text=" + encodeURIComponent(mensagem);
+    elWhatsapp.href = "https://wa.me/5561984472207?text=" + encodeURIComponent(mensagem);
   }
 
   /* PRODUTOS SIMILARES: mesma categoria, excluindo o produto atual */
@@ -73,12 +73,12 @@ function renderizarPaginaDeProduto() {
   const tituloSimilares = document.querySelector("#similares-titulo");
 
   if (grade) {
-    const similares = Object.keys(PRODUTOS_SOFTBIKE)
+    const similares = Object.keys(PRODUTOS_SOFTBYKE)
       .filter(function (chave) {
-        return chave !== idProduto && PRODUTOS_SOFTBIKE[chave].categoria === produto.categoria;
+        return chave !== idProduto && PRODUTOS_SOFTBYKE[chave].categoria === produto.categoria;
       })
       .map(function (chave) {
-        return Object.assign({ id: chave }, PRODUTOS_SOFTBIKE[chave]);
+        return Object.assign({ id: chave }, PRODUTOS_SOFTBYKE[chave]);
       })
       .slice(0, 4);
 

@@ -1,5 +1,5 @@
 /* ==========================================================
-   SOFTBIKE - JAVASCRIPT PRINCIPAL
+   SOFTBYKE - JAVASCRIPT PRINCIPAL
    Funcionalidades: pré-carregamento, transição entre páginas,
    cabeçalho dinâmico, menu mobile, revelação ao rolar,
    botão voltar ao topo, formulário de contato, orçamento
@@ -124,63 +124,176 @@ if (botaoTopo) {
   });
 }
 
-/* 7. FORMULÁRIO DE CONTATO (sem backend - apenas demonstração) */
+/* 7. FORMULÁRIO DE CONTATO -> ENCAMINHA PARA O WHATSAPP DA FILIAL ESCOLHIDA */
 const formularioContato = document.querySelector("#form-contato");
+const modalContatoFilial = document.querySelector("#modal-contato-filial");
 
-if (formularioContato) {
+if (formularioContato && modalContatoFilial) {
+  const status = document.querySelector("#status-formulario");
+  const botaoFecharModalContato = modalContatoFilial.querySelector(".modal-orcamento-fechar");
+  const botoesFilialContato = modalContatoFilial.querySelectorAll(".filial-botao");
+  let dadosFormularioContato = null;
+
+  const abrirModalContato = function () {
+    modalContatoFilial.classList.add("aberto");
+    modalContatoFilial.setAttribute("aria-hidden", "false");
+  };
+
+  const fecharModalContato = function () {
+    modalContatoFilial.classList.remove("aberto");
+    modalContatoFilial.setAttribute("aria-hidden", "true");
+  };
+
   formularioContato.addEventListener("submit", function (evento) {
     evento.preventDefault();
 
     const nome = document.querySelector("#nome").value.trim();
     const email = document.querySelector("#email").value.trim();
     const telefone = document.querySelector("#telefone").value.trim();
+    const assunto = document.querySelector("#assunto").value.trim();
     const mensagem = document.querySelector("#mensagem").value.trim();
-    const status = document.querySelector("#status-formulario");
 
     // validação básica dos campos obrigatórios
-    if (nome === "" || email === "" || telefone === "" || mensagem === "") {
+    if (nome === "" || email === "" || telefone === "" || assunto === "" || mensagem === "") {
       status.textContent = "Por favor, preencha todos os campos obrigatórios.";
       status.className = "mensagem-status erro";
       return;
     }
 
-    // como não existe backend, apenas simulamos o envio
-    status.textContent = "Mensagem registrada para demonstração.";
-    status.className = "mensagem-status sucesso";
-    formularioContato.reset();
+    dadosFormularioContato = { nome: nome, email: email, telefone: telefone, assunto: assunto, mensagem: mensagem };
+    status.textContent = "";
+    status.className = "mensagem-status";
+    abrirModalContato();
+  });
+
+  if (botaoFecharModalContato) {
+    botaoFecharModalContato.addEventListener("click", fecharModalContato);
+  }
+
+  modalContatoFilial.addEventListener("click", function (evento) {
+    if (evento.target === modalContatoFilial) fecharModalContato();
+  });
+
+  document.addEventListener("keydown", function (evento) {
+    if (evento.key === "Escape") fecharModalContato();
+  });
+
+  botoesFilialContato.forEach(function (botao) {
+    botao.addEventListener("click", function () {
+      if (!dadosFormularioContato) return;
+
+      const telefoneFilial = botao.dataset.telefone;
+      const mensagemWhatsapp = [
+        "Olá! Meu nome é " + dadosFormularioContato.nome + ".",
+        "Assunto: " + dadosFormularioContato.assunto,
+        "Mensagem: " + dadosFormularioContato.mensagem,
+        "E-mail: " + dadosFormularioContato.email,
+        "Telefone: " + dadosFormularioContato.telefone
+      ].join("\n");
+
+      const url = "https://wa.me/" + telefoneFilial + "?text=" + encodeURIComponent(mensagemWhatsapp);
+      window.open(url, "_blank", "noopener");
+
+      fecharModalContato();
+      formularioContato.reset();
+      status.textContent = "Mensagem encaminhada para o WhatsApp da filial escolhida.";
+      status.className = "mensagem-status sucesso";
+      dadosFormularioContato = null;
+    });
   });
 }
 
 /* 8. BOTÃO "SOLICITAR ORÇAMENTO" (página de serviços) */
 const botoesOrcamento = document.querySelectorAll(".botao-orcamento");
+const modalOrcamento = document.querySelector("#modal-orcamento");
 
-botoesOrcamento.forEach(function (botao) {
-  botao.addEventListener("click", function () {
-    const servico = botao.dataset.servico;
-    alert("Orçamento solicitado para o serviço: " + servico + ". Em breve entraremos em contato!");
+if (botoesOrcamento.length && modalOrcamento) {
+  const botaoFecharModal = modalOrcamento.querySelector(".modal-orcamento-fechar");
+  const botoesFilial = modalOrcamento.querySelectorAll(".filial-botao");
+  let servicoSelecionado = "";
+
+  const abrirModalOrcamento = function (servico) {
+    servicoSelecionado = servico;
+    modalOrcamento.classList.add("aberto");
+    modalOrcamento.setAttribute("aria-hidden", "false");
+  };
+
+  const fecharModalOrcamento = function () {
+    modalOrcamento.classList.remove("aberto");
+    modalOrcamento.setAttribute("aria-hidden", "true");
+  };
+
+  botoesOrcamento.forEach(function (botao) {
+    botao.addEventListener("click", function () {
+      abrirModalOrcamento(botao.dataset.servico);
+    });
   });
-});
 
-/* 9. FILTRO DE PRODUTOS (Todos / Bicicletas / Acessórios / Roupas) */
+  if (botaoFecharModal) {
+    botaoFecharModal.addEventListener("click", fecharModalOrcamento);
+  }
+
+  modalOrcamento.addEventListener("click", function (evento) {
+    if (evento.target === modalOrcamento) fecharModalOrcamento();
+  });
+
+  document.addEventListener("keydown", function (evento) {
+    if (evento.key === "Escape") fecharModalOrcamento();
+  });
+
+  botoesFilial.forEach(function (botao) {
+    botao.addEventListener("click", function () {
+      const telefone = botao.dataset.telefone;
+      const mensagem = "Bom dia, queria fazer um orçamento de " + servicoSelecionado + ".";
+      const url = "https://wa.me/" + telefone + "?text=" + encodeURIComponent(mensagem);
+      window.open(url, "_blank", "noopener");
+      fecharModalOrcamento();
+    });
+  });
+}
+
+/* 9. ATALHOS DE CATEGORIA (Todos / Bicicletas / Acessórios / Roupas) */
+/* Todos os produtos ficam sempre visíveis na página; os botões apenas rolam até a seção. */
 const filtroBotoes = document.querySelectorAll(".filtro-botao");
-const cardsProdutos = document.querySelectorAll(".produto-card");
+
+const mapaFiltroParaSecao = {
+  bicicletas: "bicicletas",
+  acessorios: "acessorios",
+  roupas: "vestuario"
+};
 
 filtroBotoes.forEach(function (botao) {
   botao.addEventListener("click", function () {
-    // marca visualmente o filtro ativo
+    // marca visualmente o botão ativo
     filtroBotoes.forEach(function (b) {
       b.classList.remove("ativo");
     });
     botao.classList.add("ativo");
 
-    const categoria = botao.dataset.filtro;
+    const idSecao = mapaFiltroParaSecao[botao.dataset.filtro];
+    const secaoAlvo = idSecao ? document.getElementById(idSecao) : null;
 
-    cardsProdutos.forEach(function (card) {
-      if (categoria === "todos" || card.dataset.categoria === categoria) {
-        card.classList.remove("oculto");
-      } else {
-        card.classList.add("oculto");
-      }
-    });
+    if (secaoAlvo) {
+      secaoAlvo.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   });
 });
+
+/* 10. VIR DIRETO PARA UMA CATEGORIA (link "Ver mais" da página inicial) */
+const secoesProdutos = document.querySelectorAll("#bicicletas, #acessorios, #vestuario");
+
+if (secoesProdutos.length) {
+  const irDireitoParaCategoria = function () {
+    const idSecao = window.location.hash.replace("#", "");
+    const secaoAlvo = document.getElementById(idSecao);
+    if (!secaoAlvo) return;
+
+    setTimeout(function () {
+      secaoAlvo.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 400);
+  };
+
+  window.addEventListener("load", irDireitoParaCategoria);
+}
